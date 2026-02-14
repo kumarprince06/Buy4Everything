@@ -13,10 +13,11 @@
  * Used with: CITY_BEST_SELLER product list from constants/products.ts
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Theme } from '../../theme';
 import { Images } from '../../assets/images';
+import { Icons } from '../../assets/icons';
 import { Product } from '../../types';
 import { formatPrice } from '../../utils/price';
 
@@ -28,6 +29,15 @@ interface CityBestSellerCardProps {
 }
 
 export const CityBestSellerCard: React.FC<CityBestSellerCardProps> = ({ product, onPress, onAdd }) => {
+  const [quantity, setQuantity] = useState(0);
+
+  const handleAdd = () => {
+    setQuantity(prev => prev + 1);
+    onAdd();
+  };
+
+  const handleDelete = () => setQuantity(0);
+
   return (
     <TouchableOpacity style={styles.container} onPress={onPress} activeOpacity={0.9}>
       <View style={styles.cardInner}>
@@ -47,7 +57,7 @@ export const CityBestSellerCard: React.FC<CityBestSellerCardProps> = ({ product,
             </View>
           )}
         </View>
-        {/* Details outside border: name, price row (price + ADD on same row) */}
+        {/* Details outside border: name, price row (price + ADD or quantity control on same row) */}
         <View style={styles.infoContainer}>
           <Text style={styles.name} numberOfLines={2}>{product.name}</Text>
           <View style={styles.priceRow}>
@@ -57,9 +67,21 @@ export const CityBestSellerCard: React.FC<CityBestSellerCardProps> = ({ product,
                 <Text style={styles.originalPrice}>{formatPrice(product.originalPrice)}</Text>
               )}
             </View>
-            <TouchableOpacity style={styles.addButton} onPress={onAdd}>
-              <Text style={styles.addButtonText}>ADD</Text>
-            </TouchableOpacity>
+            {quantity === 0 ? (
+              <TouchableOpacity style={styles.addButton} onPress={handleAdd}>
+                <Text style={styles.addButtonText}>ADD</Text>
+              </TouchableOpacity>
+            ) : (
+              <View style={styles.quantityControl}>
+                <TouchableOpacity style={styles.quantityControlBtn} onPress={handleDelete}>
+                  <Image source={Icons.delete} style={styles.quantityControlIcon} resizeMode="contain" />
+                </TouchableOpacity>
+                <Text style={styles.quantityControlNumber}>{quantity}</Text>
+                <TouchableOpacity style={styles.quantityControlBtn} onPress={handleAdd}>
+                  <Image source={Icons.plus} style={styles.quantityControlIcon} resizeMode="contain" />
+                </TouchableOpacity>
+              </View>
+            )}
           </View>
         </View>
       </View>
@@ -174,5 +196,33 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: Theme.colors.white,
     fontWeight: '700',
+  },
+  /** Quantity control: delete | number | plus (replaces ADD when item in cart) */
+  quantityControl: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: Theme.colors.primary,
+    borderRadius: 6,
+    paddingVertical: 4,
+    paddingHorizontal: 6,
+    gap: 6,
+    flexShrink: 0,
+  },
+  quantityControlBtn: {
+    padding: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  quantityControlIcon: {
+    width: 14,
+    height: 14,
+    tintColor: Theme.colors.white,
+  },
+  quantityControlNumber: {
+    fontSize: 12,
+    fontWeight: '700',
+    color: Theme.colors.white,
+    minWidth: 16,
+    textAlign: 'center',
   },
 });

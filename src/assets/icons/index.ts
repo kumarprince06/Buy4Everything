@@ -15,4 +15,7 @@ export const Icons = {
     search: require('./search.png'),
     seeAll: require('./see-all.png'),
     star: require('./star.png'),
+    /** Quantity control on product cards (add to cart state) */
+    delete: require('./delete.png'),
+    plus: require('./plus.png'),
 };

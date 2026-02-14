@@ -8,7 +8,7 @@
  * Used with: BESTSELLERS and SHOP_BY_OFFER from constants/products.ts
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Theme } from '../../theme';
 import { Images } from '../../assets/images';
@@ -24,6 +24,19 @@ interface BestsellerCardProps {
 }
 
 export const BestsellerCard: React.FC<BestsellerCardProps> = ({ product, onPress, onAdd }) => {
+  const [quantity, setQuantity] = useState(0);
+
+  const handleAdd = () => {
+    setQuantity(prev => prev + 1);
+    onAdd();
+  };
+
+  const handleRemove = () => {
+    if (quantity > 0) setQuantity(prev => prev - 1);
+  };
+
+  const handleDelete = () => setQuantity(0);
+
   return (
     <TouchableOpacity style={styles.container} onPress={onPress} activeOpacity={0.9}>
       <View style={styles.imageContainer}>
@@ -37,9 +50,21 @@ export const BestsellerCard: React.FC<BestsellerCardProps> = ({ product, onPress
             <Text style={styles.discountText}>OFF ₹{product.discountAmount}</Text>
           </View>
         )}
-        <TouchableOpacity style={styles.cartButton} onPress={onAdd}>
-          <Image source={Icons.tabCart} style={styles.cartIcon} resizeMode="contain" />
-        </TouchableOpacity>
+        {quantity === 0 ? (
+          <TouchableOpacity style={styles.cartButton} onPress={handleAdd}>
+            <Image source={Icons.tabCart} style={styles.cartIcon} resizeMode="contain" />
+          </TouchableOpacity>
+        ) : (
+          <View style={styles.quantityControl}>
+            <TouchableOpacity style={styles.quantityControlBtn} onPress={handleDelete}>
+              <Image source={Icons.delete} style={styles.quantityControlIcon} resizeMode="contain" />
+            </TouchableOpacity>
+            <Text style={styles.quantityControlNumber}>{quantity}</Text>
+            <TouchableOpacity style={styles.quantityControlBtn} onPress={handleAdd}>
+              <Image source={Icons.plus} style={styles.quantityControlIcon} resizeMode="contain" />
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
       <View style={styles.infoContainer}>
         {product.name ? (
@@ -103,6 +128,36 @@ const styles = StyleSheet.create({
     backgroundColor: Theme.colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  /** Quantity control pill: delete | number | plus (when item added to cart) */
+  quantityControl: {
+    position: 'absolute',
+    bottom: 6,
+    right: 6,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: Theme.colors.primary,
+    borderRadius: 20,
+    paddingVertical: 4,
+    paddingHorizontal: 6,
+    gap: 8,
+  },
+  quantityControlBtn: {
+    padding: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  quantityControlIcon: {
+    width: 16,
+    height: 16,
+    tintColor: Theme.colors.white,
+  },
+  quantityControlNumber: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: Theme.colors.white,
+    minWidth: 18,
+    textAlign: 'center',
   },
   /** Name, rating, price below image */
   infoContainer: {
