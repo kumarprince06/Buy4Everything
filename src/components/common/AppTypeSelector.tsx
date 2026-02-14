@@ -44,7 +44,7 @@ export const AppTypeSelector: React.FC<AppTypeSelectorProps> = ({
               <Icon 
                 name="lock-closed" 
                 size={20} 
-                color={Theme.colors.white} 
+                color={isActive ? Theme.colors.black : Theme.colors.primary} 
               />
             )}
             <Text
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     backgroundColor: Theme.colors.secondary, // Yellow
   },
   inactiveTab: {
-    backgroundColor: Theme.colors.primary, // Green
+    backgroundColor: Theme.colors.white,
   },
   tabText: {
     ...Theme.typography.bodyMedium,
@@ -94,6 +94,6 @@ const styles = StyleSheet.create({
     color: Theme.colors.black,
   },
   inactiveTabText: {
-    color: Theme.colors.white,
+    color: Theme.colors.black,
   },
 });

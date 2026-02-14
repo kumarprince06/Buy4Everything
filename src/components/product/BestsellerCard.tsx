@@ -5,6 +5,7 @@ import { Images } from '../../assets/images';
 import { Product } from '../../types';
 import { formatPrice } from '../../utils/price';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { Icons } from '../../assets/icons';
 
 interface BestsellerCardProps {
   product: Product;
@@ -27,7 +28,8 @@ export const BestsellerCard: React.FC<BestsellerCardProps> = ({ product, onPress
           </View>
         )}
         <TouchableOpacity style={styles.cartButton} onPress={onAdd}>
-          <Icon name="cart" size={18} color={Theme.colors.white} />
+          {/* <Icon name="cart" size={18} color={Theme.colors.white} /> */}
+          <Image source={Icons.tabCart} style={styles.cartIcon} resizeMode="contain" />
         </TouchableOpacity>
       </View>
       <View style={styles.infoContainer}>
@@ -79,8 +81,8 @@ const styles = StyleSheet.create({
   },
   cartButton: {
     position: 'absolute',
-    bottom: 8,
-    right: 8,
+    bottom: 6,
+    right: 6,
     width: 32,
     height: 32,
     borderRadius: 16,
@@ -107,5 +109,10 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: Theme.colors.text,
     fontSize: 16,
+  },
+  cartIcon: {
+    width: 18,
+    height: 18,
+    tintColor: Theme.colors.white,
   },
 });

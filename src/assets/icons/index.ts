@@ -1,9 +1,17 @@
 export const Icons = {
     location: require('./location_icon.png'),
+    locationPin: require('./location.png'),
     locationAlt: require('./location_icon_alt.png'),
+    expandDown: require('./expand-down.png'),
     phone: require('./phone_icon.png'),
     group: require('./group_icon.png'),
-    /** Back arrow for headers (e.g. OTP Verify Number) */
     arrowBack: require('./arrow_back.png'),
     time: require('./clock.png'),
+    tabHome: require('./Tab-home.png'),
+    tabCart: require('./Tab-cart.png'),
+    tabExplore: require('./Tab-explore.png'),
+    tabMyOrder: require('./Tab-myorder.png'),
+    tabProfile: require('./Tab-Profile.png'),
+    search: require('./search.png'),
+    seeAll: require('./see-all.png'),
 };

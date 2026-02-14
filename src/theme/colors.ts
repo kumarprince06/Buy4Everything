@@ -5,6 +5,7 @@ export const Colors = {
     surface: '#F8F9FA',
     text: '#1C1C1C',
     textSecondary: '#666666',
+    tabInactive: '#5E5F60',
     border: '#E0E0E0',
     white: '#FFFFFF',
     black: '#000000',
@@ -16,6 +17,8 @@ export const Colors = {
         blue: '#E3F2FD',
         pink: '#FCE4EC',
     },
+    /** Categories section background (Figma) */
+    categoriesSection: '#FFF8C7',
     lightGreen: '#F1F8E9',
     lightOrange: '#FFE0B2',
     lightBlue: '#BBDEFB',

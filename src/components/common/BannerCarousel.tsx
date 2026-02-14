@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Dimensions, ImageSourcePropType } from 'react-native';
 import { Theme } from '../../theme';
 
@@ -17,7 +17,11 @@ interface BannerCarouselProps {
 }
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
-const BANNER_WIDTH = SCREEN_WIDTH - (Theme.spacing.l * 2);
+const PEEK = Theme.spacing.m;
+const CARD_WIDTH = SCREEN_WIDTH - PEEK * 2;
+const ITEM_WIDTH = CARD_WIDTH;
+const PADDING_HORIZONTAL = PEEK;
+const AUTO_PLAY_INTERVAL_MS = 4000;
 
 export const BannerCarousel: React.FC<BannerCarouselProps> = ({
   banners,
@@ -25,16 +29,54 @@ export const BannerCarousel: React.FC<BannerCarouselProps> = ({
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollViewRef = useRef<ScrollView>(null);
+  const activeIndexRef = useRef(0);
+
+  activeIndexRef.current = activeIndex;
+
+  useEffect(() => {
+    if (banners.length <= 1) return undefined;
+    const interval = setInterval(() => {
+      const next = (activeIndexRef.current + 1) % banners.length;
+      activeIndexRef.current = next;
+      setActiveIndex(next);
+      scrollViewRef.current?.scrollTo({
+        x: next * ITEM_WIDTH,
+        animated: true,
+      });
+    }, AUTO_PLAY_INTERVAL_MS);
+    return () => clearInterval(interval);
+  }, [banners.length]);
 
   const handleScroll = (event: any) => {
     const scrollPosition = event.nativeEvent.contentOffset.x;
-    const index = Math.round(scrollPosition / BANNER_WIDTH);
-    setActiveIndex(index);
+    const index = Math.round((scrollPosition - PADDING_HORIZONTAL) / ITEM_WIDTH);
+    const clamped = Math.max(0, Math.min(index, banners.length - 1));
+    activeIndexRef.current = clamped;
+    setActiveIndex(clamped);
   };
 
-  const renderBanner = (banner: Banner, index: number) => (
-    <View key={banner.id} style={[styles.bannerContainer, { width: BANNER_WIDTH }]}>
-      <View style={[styles.banner, { backgroundColor: banner.backgroundColor || '#E8F5E9' }]}>
+  const ACTIVE_SCALE = 1;
+  const INACTIVE_SCALE = 0.88;
+
+  const renderBanner = (banner: Banner, index: number) => {
+    const isActive = index === activeIndex;
+    const scale = isActive ? ACTIVE_SCALE : INACTIVE_SCALE;
+    return (
+      <View
+        key={banner.id}
+        style={[
+          styles.bannerWrapper,
+          { width: ITEM_WIDTH },
+        ]}
+      >
+        <View
+          style={[
+            styles.bannerContainer,
+            { width: CARD_WIDTH },
+            { transform: [{ scale }] },
+          ]}
+        >
+          <View style={[styles.banner, { backgroundColor: banner.backgroundColor || '#E8F5E9' }]}>
         <View style={styles.content}>
           <Text style={styles.title}>{banner.title}</Text>
           <Text style={styles.subtitle}>{banner.subtitle}</Text>
@@ -49,49 +91,50 @@ export const BannerCarousel: React.FC<BannerCarouselProps> = ({
           <Image source={banner.image} style={styles.image} resizeMode="contain" />
         </View>
       </View>
-    </View>
-  );
+        </View>
+      </View>
+    );
+  };
+
+  const snapOffsets = banners.map((_, i) => i * ITEM_WIDTH);
 
   return (
     <View style={styles.container}>
       <ScrollView
         ref={scrollViewRef}
         horizontal
-        pagingEnabled
         showsHorizontalScrollIndicator={false}
         onScroll={handleScroll}
         scrollEventThrottle={16}
-        contentContainerStyle={styles.scrollContent}
+        snapToOffsets={snapOffsets}
+        decelerationRate="fast"
+        contentContainerStyle={[
+          styles.scrollContent,
+          {
+            paddingLeft: PADDING_HORIZONTAL,
+            paddingRight: PADDING_HORIZONTAL,
+          },
+        ]}
       >
         {banners.map((banner, index) => renderBanner(banner, index))}
       </ScrollView>
-      {banners.length > 1 && (
-        <View style={styles.dotsContainer}>
-          {banners.map((_, index) => (
-            <View
-              key={index}
-              style={[
-                styles.dot,
-                index === activeIndex && styles.activeDot,
-              ]}
-            />
-          ))}
-        </View>
-      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    width: SCREEN_WIDTH,
     marginBottom: Theme.spacing.m,
   },
   scrollContent: {
-    paddingHorizontal: Theme.spacing.l,
+    flexGrow: 0,
   },
-  bannerContainer: {
-    marginRight: Theme.spacing.m,
+  bannerWrapper: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
+  bannerContainer: {},
   banner: {
     height: 180,
     borderRadius: 16,
@@ -109,6 +152,7 @@ const styles = StyleSheet.create({
     ...Theme.typography.h1,
     fontSize: 28,
     fontWeight: '700',
+    width: '80%',
     color: Theme.colors.text,
     marginBottom: Theme.spacing.xs,
   },
@@ -140,22 +184,5 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
-  },
-  dotsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: Theme.spacing.s,
-    gap: 6,
-  },
-  dot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: Theme.colors.border,
-  },
-  activeDot: {
-    backgroundColor: Theme.colors.primary,
-    width: 24,
   },
 });

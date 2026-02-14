@@ -29,8 +29,8 @@ export const MAIN_BANNERS: Banner[] = [
   },
   {
     id: '3',
-    title: 'Big Discount',
-    subtitle: 'Save more today',
+    title: 'Get Same Day Delivery',
+    subtitle: 'On order above $50',
     buttonText: 'Shop Now',
     image: Images.productImage2,
     backgroundColor: '#E8F5E9',

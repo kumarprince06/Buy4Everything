@@ -15,4 +15,8 @@ export const Images = {
     productImage3: require('./product_image_3.png'),
     productImage4: require('./product_image_4.png'),
     productImage5: require('./product_image_5.png'),
+    // Category icons (Laundry, Beverages, Vegetables)
+    beverages: require('./beverages.png'),
+    laundary: require('./laundary.png'),
+    vegetables: require('./vegetables.png'),
 };

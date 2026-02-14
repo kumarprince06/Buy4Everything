@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, TextInput, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { View, TextInput, StyleSheet, Image } from 'react-native';
 import { Theme } from '../../theme';
+import { Icons } from '../../assets/icons';
 
 // import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -9,17 +9,25 @@ interface SearchBarProps {
   placeholder?: string;
   value?: string;
   onChangeText?: (text: string) => void;
+  /** Use when bar sits on dark (e.g. green) background – white bar, dark icon */
+  variant?: 'default' | 'onDark';
 }
 
 export const SearchBar: React.FC<SearchBarProps> = ({
   placeholder = "Search anything",
   value,
   onChangeText,
+  variant = 'default',
 }) => {
+  const isOnDark = variant === 'onDark';
   return (
-    <View style={styles.container}>
-      <View style={styles.searchBar}>
-        <Icon name="search" size={20} color={Theme.colors.textSecondary} />
+    <View style={[styles.container, isOnDark && styles.containerOnDark]}>
+      <View style={[styles.searchBar, isOnDark && styles.searchBarOnDark]}>
+        <Image
+          source={Icons.search}
+          style={[styles.searchIcon, isOnDark && styles.searchIconOnDark]}
+          resizeMode="contain"
+        />
         <TextInput
           placeholder={placeholder}
           style={styles.searchInput}
@@ -34,7 +42,9 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    padding: Theme.spacing.l,
+    paddingHorizontal: Theme.spacing.l,
+    paddingTop: Theme.spacing.xs,
+    paddingBottom: Theme.spacing.s,
   },
   searchBar: {
     height: 48,
@@ -46,9 +56,29 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: Theme.spacing.m,
   },
+  searchIcon: {
+    width: 20,
+    height: 20,
+    tintColor: Theme.colors.textSecondary,
+  },
+  searchIconOnDark: {
+    tintColor: Theme.colors.textSecondary,
+  },
   searchInput: {
     flex: 1,
     ...Theme.typography.bodyMedium,
     marginLeft: Theme.spacing.s,
+  },
+  containerOnDark: {
+    paddingHorizontal: Theme.spacing.l,
+  },
+  searchBarOnDark: {
+    backgroundColor: Theme.colors.white,
+    borderWidth: 0,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 6,
+    elevation: 3,
   },
 });
