@@ -38,5 +38,13 @@ export const Colors = {
     lightOrange: '#FFE0B2',
     lightBlue: '#BBDEFB',
     lightPink: '#F8BBD0',
+    /** All Categories card backgrounds (pastel cycle) */
+    allCategoriesCard: {
+        green: '#E8F5E9',
+        peach: '#FFF3E0',
+        cream: '#FFFDE7',
+        purple: '#EDE7F6',
+        blue: '#E3F2FD',
+    },
     link: '#2DD4BF',
 };
