@@ -1,8 +1,17 @@
+/**
+ * SectionHeader.tsx
+ *
+ * Reusable section header for Home (and other screens): title on the left, optional "See All"
+ * link with icon on the right. Used above Bestsellers, Shop by Offer, Explore Trending Products,
+ * City Best Seller, etc.
+ */
+
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Theme } from '../../theme';
 import { Icons } from '../../assets/icons';
 
+/** Props: title (required), optional see-all callback and visibility */
 interface SectionHeaderProps {
   title: string;
   onSeeAllPress?: () => void;

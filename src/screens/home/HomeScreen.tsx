@@ -1,3 +1,19 @@
+/**
+ * HomeScreen.tsx
+ *
+ * Main home/dashboard screen. Renders (top to bottom):
+ * - Green header: Grocery/Ecommerce tabs, greeting, location (with modal), search bar
+ * - Banner carousel (overlaps header)
+ * - Categories: horizontal list with icons (Fruits, Milk & Egg, etc.)
+ * - Bestsellers: horizontal list of BestsellerCard
+ * - Middle banner (single image)
+ * - Shop by Offer: horizontal list of BestsellerCard
+ * - Explore Trending Products: 4×3 grid (no horizontal scroll)
+ * - City Best Seller: horizontal list of CityBestSellerCard
+ *
+ * Uses safe area insets for the green header; ScreenContainer handles scroll and safe edges.
+ */
+
 import React, { useState } from 'react';
 import {
   View,
@@ -8,6 +24,7 @@ import {
   Image,
   FlatList,
   StatusBar,
+  Dimensions,
 } from 'react-native';
 import { ScreenContainer } from '../../components/common/ScreenContainer';
 import { SearchBar } from '../../components/common/SearchBar';
@@ -23,14 +40,26 @@ import { Theme } from '../../theme';
 import { LocationSelectionModal } from '../../components/location/LocationSelectionModal';
 import { Icons } from '../../assets/icons';
 import { CATEGORIES } from '../../constants/categories';
-import { BESTSELLERS, SHOP_BY_OFFER, CITY_BEST_SELLER } from '../../constants/products';
-
-const TRENDING_PRODUCTS = BESTSELLERS;
+import {
+  BESTSELLERS,
+  SHOP_BY_OFFER,
+  CITY_BEST_SELLER,
+  EXPLORE_TRENDING_PRODUCTS,
+} from '../../constants/products';
 import { MAIN_BANNERS } from '../../constants/banners';
+
+/** Grid layout: 4 columns for trending products */
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
+const TRENDING_COLUMNS = 4;
+const TRENDING_GAP = Theme.spacing.s;
+const TRENDING_ITEM_WIDTH =
+  (SCREEN_WIDTH - Theme.spacing.l * 2 - TRENDING_GAP * (TRENDING_COLUMNS - 1)) /
+  TRENDING_COLUMNS;
 import { Images } from '../../assets/images';
 import { useLocation } from '../../hooks/useLocation';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+/** Header tabs: Grocery vs Ecommerce */
 const TABS = [
   { id: 'grocery', label: 'Grocery' },
   { id: 'ecommerce', label: 'Ecommerce' },
@@ -55,7 +84,10 @@ export const HomeScreen = () => {
       statusBarColor={Theme.colors.primary}
       barStyle="light-content"
     >
-      <StatusBar barStyle="light-content" backgroundColor={Theme.colors.primary} />
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={Theme.colors.primary}
+      />
       {/* Green header – toggles, greeting, location, search (per Figma). No logo. */}
       <View style={[styles.greenHeader, { paddingTop: insets.top }]}>
         <AppTypeSelector
@@ -64,7 +96,9 @@ export const HomeScreen = () => {
           onTabChange={setActiveTab}
         />
         <View style={styles.userSection}>
-          <Text style={styles.greeting}>Hi, <Text style={styles.greetingName}>Prince</Text></Text>
+          <Text style={styles.greeting}>
+            Hi, <Text style={styles.greetingName}>Prince</Text>
+          </Text>
           <TouchableOpacity
             style={styles.locationRow}
             onPress={openLocationModal}
@@ -89,31 +123,35 @@ export const HomeScreen = () => {
       <View style={styles.carouselOverlap}>
         <BannerCarousel
           banners={MAIN_BANNERS}
-          onBannerPress={(banner) => {
+          onBannerPress={banner => {
             console.log('Banner pressed:', banner);
           }}
         />
       </View>
 
-      {/* Categories – Figma: white circle with yellow inner + icon */}
+      {/* Categories - white circle with yellow inner + icon */}
       <View style={styles.categorySection}>
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}
           data={CATEGORIES}
-          keyExtractor={(item) => item.id}
+          keyExtractor={item => item.id}
           contentContainerStyle={styles.categoryList}
           renderItem={({ item }) => (
-            <TouchableOpacity 
+            <TouchableOpacity
               style={styles.categoryItem}
-              onPress={() => navigation.navigate(Routes.CATEGORY_LIST, { categoryName: item.name })}
+              onPress={() =>
+                navigation.navigate(Routes.CATEGORY_LIST, {
+                  categoryName: item.name,
+                })
+              }
             >
               <View style={styles.categoryCircleOuter}>
                 <View style={styles.categoryCircleInner}>
                   {item.icon && (
-                    <Image 
-                      source={item.icon} 
-                      style={styles.categoryImage} 
+                    <Image
+                      source={item.icon}
+                      style={styles.categoryImage}
                       resizeMode="contain"
                     />
                   )}
@@ -132,39 +170,30 @@ export const HomeScreen = () => {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.productList}
       >
-        {BESTSELLERS.map((item) => (
+        {BESTSELLERS.map(item => (
           <BestsellerCard
             key={item.id}
             product={item}
-            onPress={() => navigation.navigate(Routes.PRODUCT_DETAILS, { product: item })}
+            onPress={() =>
+              navigation.navigate(Routes.PRODUCT_DETAILS, { product: item })
+            }
             onAdd={() => {}}
           />
         ))}
       </ScrollView>
 
-      {/* Vegetable Banner */}
-      <VegetableBanner
-        title="Fresh Vegetables"
-        subtitle="Get Up To 40% OFF"
-        image={Images.productImage3}
-      />
-
-      {/* Explore Trending Products */}
-      <SectionHeader title="Explore Trending Products" />
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.productList}
+      {/* Middle Banner (below Bestsellers) */}
+      <TouchableOpacity
+        style={styles.middleBannerContainer}
+        onPress={() => {}}
+        activeOpacity={0.9}
       >
-        {TRENDING_PRODUCTS.map((item) => (
-          <BestsellerCard
-            key={item.id}
-            product={item}
-            onPress={() => navigation.navigate(Routes.PRODUCT_DETAILS, { product: item })}
-            onAdd={() => {}}
-          />
-        ))}
-      </ScrollView>
+        <Image
+          source={Images.middleBanner}
+          style={styles.middleBannerImage}
+          resizeMode="contain"
+        />
+      </TouchableOpacity>
 
       {/* Shop by Offer */}
       <SectionHeader title="Shop by Offer" />
@@ -173,15 +202,49 @@ export const HomeScreen = () => {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.productList}
       >
-        {SHOP_BY_OFFER.map((item) => (
+        {SHOP_BY_OFFER.map(item => (
           <BestsellerCard
             key={item.id}
             product={item}
-            onPress={() => navigation.navigate(Routes.PRODUCT_DETAILS, { product: item })}
+            onPress={() =>
+              navigation.navigate(Routes.PRODUCT_DETAILS, { product: item })
+            }
             onAdd={() => {}}
           />
         ))}
       </ScrollView>
+
+      {/* Explore Trending Products – 12 items in 4×3 grid with image, name and details */}
+      <View style={styles.trendingSection}>
+        <SectionHeader title="Explore Trending Products" />
+        <View style={styles.trendingGrid}>
+          {EXPLORE_TRENDING_PRODUCTS.map((item, index) => (
+            <TouchableOpacity
+              key={item.id}
+              style={[
+                styles.trendingGridItem,
+                (index + 1) % TRENDING_COLUMNS === 0 &&
+                  styles.trendingGridItemEnd,
+              ]}
+              onPress={() =>
+                navigation.navigate(Routes.PRODUCT_DETAILS, { product: item })
+              }
+              activeOpacity={0.9}
+            >
+              <View style={styles.trendingGridImageWrap}>
+                <Image
+                  source={item.image}
+                  style={styles.trendingGridImage}
+                  resizeMode="contain"
+                />
+              </View>
+              <Text style={styles.trendingGridName} numberOfLines={2}>
+                {item.name}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </View>
 
       {/* City Best Seller */}
       <SectionHeader title="City Best Seller" />
@@ -190,17 +253,17 @@ export const HomeScreen = () => {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.productList}
       >
-        {CITY_BEST_SELLER.map((item) => (
+        {CITY_BEST_SELLER.map(item => (
           <CityBestSellerCard
             key={item.id}
             product={item}
-            onPress={() => navigation.navigate(Routes.PRODUCT_DETAILS, { product: item })}
+            onPress={() =>
+              navigation.navigate(Routes.PRODUCT_DETAILS, { product: item })
+            }
             onAdd={() => {}}
           />
         ))}
       </ScrollView>
-
-      <View style={{ height: 100 }} />
 
       <LocationSelectionModal
         visible={locationModalVisible}
@@ -212,6 +275,7 @@ export const HomeScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  /** Green top bar: tabs, greeting, location, search (safe area top applied inline) */
   greenHeader: {
     backgroundColor: Theme.colors.primary,
     paddingBottom: Theme.spacing.xl,
@@ -321,6 +385,63 @@ const styles = StyleSheet.create({
   productList: {
     paddingHorizontal: Theme.spacing.l,
     paddingBottom: Theme.spacing.m,
+  },
+  trendingSection: {
+    paddingVertical: Theme.spacing.m,
+    marginBottom: Theme.spacing.xs,
+  },
+  trendingGrid: {
+    backgroundColor: Theme.colors.trendingSection,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    paddingHorizontal: Theme.spacing.l,
+    paddingTop: Theme.spacing.s,
+  },
+  trendingGridItem: {
+    width: TRENDING_ITEM_WIDTH,
+    marginRight: TRENDING_GAP,
+    marginBottom: TRENDING_GAP,
+  },
+  trendingGridItemEnd: {
+    marginRight: 0,
+  },
+  trendingGridImageWrap: {
+    width: '100%',
+    aspectRatio: 1,
+    borderRadius: 12,
+    backgroundColor: Theme.colors.white,
+    overflow: 'hidden',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  trendingGridImage: {
+    width: '85%',
+    height: '85%',
+  },
+  trendingGridName: {
+    ...Theme.typography.caption,
+    fontSize: 11,
+    fontWeight: '600',
+    color: Theme.colors.text,
+    marginTop: Theme.spacing.xs,
+    paddingHorizontal: 2,
+  },
+  trendingGridPrice: {
+    ...Theme.typography.caption,
+    fontSize: 12,
+    fontWeight: '700',
+    color: Theme.colors.primary,
+    marginTop: 2,
+  },
+  middleBannerContainer: {
+    marginHorizontal: Theme.spacing.l,
+    marginBottom: Theme.spacing.xs,
+    borderRadius: 16,
+    overflow: 'hidden',
+  },
+  middleBannerImage: {
+    width: '100%',
+    height: 150,
   },
   locationPin: {
     width: 18,

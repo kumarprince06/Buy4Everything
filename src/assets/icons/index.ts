@@ -14,4 +14,5 @@ export const Icons = {
     tabProfile: require('./Tab-Profile.png'),
     search: require('./search.png'),
     seeAll: require('./see-all.png'),
+    star: require('./star.png'),
 };

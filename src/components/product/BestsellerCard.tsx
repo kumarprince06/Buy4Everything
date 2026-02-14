@@ -1,12 +1,22 @@
+/**
+ * BestsellerCard.tsx
+ *
+ * Reusable product card used in "Bestsellers" and "Shop by Offer" horizontal lists on the Home screen.
+ * Shows product image (with optional discount badge), name, star rating (if present), and price.
+ * Includes a cart icon button overlay on the image for add-to-cart.
+ *
+ * Used with: BESTSELLERS and SHOP_BY_OFFER from constants/products.ts
+ */
+
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Theme } from '../../theme';
 import { Images } from '../../assets/images';
 import { Product } from '../../types';
 import { formatPrice } from '../../utils/price';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { Icons } from '../../assets/icons';
 
+/** Props for the Bestseller/Shop-by-Offer product card */
 interface BestsellerCardProps {
   product: Product;
   onPress: () => void;
@@ -28,14 +38,16 @@ export const BestsellerCard: React.FC<BestsellerCardProps> = ({ product, onPress
           </View>
         )}
         <TouchableOpacity style={styles.cartButton} onPress={onAdd}>
-          {/* <Icon name="cart" size={18} color={Theme.colors.white} /> */}
           <Image source={Icons.tabCart} style={styles.cartIcon} resizeMode="contain" />
         </TouchableOpacity>
       </View>
       <View style={styles.infoContainer}>
+        {product.name ? (
+          <Text style={styles.productName} numberOfLines={2}>{product.name}</Text>
+        ) : null}
         {product.rating && (
           <View style={styles.ratingContainer}>
-            <Icon name="star" size={14} color={Theme.colors.secondary} />
+            <Image source={Icons.star} style={styles.starIcon} resizeMode="contain" />
             <Text style={styles.ratingText}>
               {product.rating} {product.reviewCount && `(${product.reviewCount.toLocaleString()})`}
             </Text>
@@ -48,6 +60,7 @@ export const BestsellerCard: React.FC<BestsellerCardProps> = ({ product, onPress
 };
 
 const styles = StyleSheet.create({
+  /** Card wrapper; fixed width for horizontal scroll */
   container: {
     width: 140,
     backgroundColor: Theme.colors.white,
@@ -55,6 +68,7 @@ const styles = StyleSheet.create({
     marginRight: Theme.spacing.m,
     overflow: 'hidden',
   },
+  /** Image area; discount badge and cart button overlay here */
   imageContainer: {
     height: 140,
     backgroundColor: '#F5F5F5',
@@ -90,14 +104,27 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  /** Name, rating, price below image */
   infoContainer: {
     padding: Theme.spacing.s,
+  },
+  productName: {
+    ...Theme.typography.bodyMedium,
+    fontSize: 16,
+    fontWeight: '600',
+    color: Theme.colors.text,
+    marginBottom: 4,
   },
   ratingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 4,
     gap: 4,
+  },
+  starIcon: {
+    width: 14,
+    height: 14,
+    tintColor: Theme.colors.secondary,
   },
   ratingText: {
     ...Theme.typography.caption,

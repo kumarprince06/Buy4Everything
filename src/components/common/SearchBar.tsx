@@ -1,9 +1,17 @@
+/**
+ * SearchBar.tsx
+ *
+ * Reusable search input with optional variant for dark backgrounds (e.g. green header).
+ * - default: standard background and icon
+ * - onDark: white/light bar and icon suitable for use on primary (green) header
+ *
+ * Used on HomeScreen in the green header with variant="onDark".
+ */
+
 import React from 'react';
 import { View, TextInput, StyleSheet, Image } from 'react-native';
 import { Theme } from '../../theme';
 import { Icons } from '../../assets/icons';
-
-// import Icon from 'react-native-vector-icons/Ionicons';
 
 interface SearchBarProps {
   placeholder?: string;
@@ -47,9 +55,9 @@ const styles = StyleSheet.create({
     paddingBottom: Theme.spacing.s,
   },
   searchBar: {
-    height: 48,
+    height: 55,
     backgroundColor: Theme.colors.surface,
-    borderRadius: 12,
+    borderRadius: 25,
     borderWidth: 1,
     borderColor: Theme.colors.border,
     flexDirection: 'row',
@@ -68,6 +76,8 @@ const styles = StyleSheet.create({
     flex: 1,
     ...Theme.typography.bodyMedium,
     marginLeft: Theme.spacing.s,
+    color: Theme.colors.text,
+    fontSize: 16,
   },
   containerOnDark: {
     paddingHorizontal: Theme.spacing.l,

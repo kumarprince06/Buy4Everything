@@ -1,3 +1,11 @@
+/**
+ * colors.ts
+ *
+ * App-wide color palette. Used via Theme.colors in components.
+ * Includes semantic names (primary, text, border) and section-specific colors
+ * that match Figma (e.g. categoriesSection, trendingSection, cardBackgroundMint).
+ */
+
 export const Colors = {
     primary: '#0CA201',
     secondary: '#FFB800',
@@ -19,6 +27,13 @@ export const Colors = {
     },
     /** Categories section background (Figma) */
     categoriesSection: '#FFF8C7',
+    /** Explore Trending Products section background (Figma) */
+    trendingSection: '#FFFBDD',
+    /** App type selector active tab (Grocery/Ecommerce) */
+    selectorActive: '#FFD500',
+    /** City Best Seller (and similar) card background (Figma) */
+    cardBackgroundMint: '#F4FFF3',
+    cardBorderColor: '#CEFFCA',
     lightGreen: '#F1F8E9',
     lightOrange: '#FFE0B2',
     lightBlue: '#BBDEFB',

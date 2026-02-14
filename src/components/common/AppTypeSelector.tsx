@@ -1,7 +1,15 @@
+/**
+ * AppTypeSelector.tsx
+ *
+ * Header tab selector (e.g. Grocery / Ecommerce) with icon and label per tab.
+ * Active tab uses Theme.colors.selectorActive; inactive uses muted styling.
+ * Icons come from Images (grocery, ecommerce). Used at top of HomeScreen.
+ */
+
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Theme } from '../../theme';
+import { Images } from '../../assets/images';
 
 interface Tab {
   id: string;
@@ -35,17 +43,9 @@ export const AppTypeSelector: React.FC<AppTypeSelectorProps> = ({
             onPress={() => onTabChange(tab.id)}
           >
             {tab.id === 'grocery' ? (
-              <Icon 
-                name="basket" 
-                size={20} 
-                color={isActive ? Theme.colors.black : Theme.colors.white} 
-              />
+              <Image source={Images.grocery} style={styles.tabIcon } resizeMode="contain" />
             ) : (
-              <Icon 
-                name="lock-closed" 
-                size={20} 
-                color={isActive ? Theme.colors.black : Theme.colors.primary} 
-              />
+              <Image source={Images.ecommerce} style={[styles.tabIcon, !isActive && styles.tabIconInactive]} resizeMode="contain" />
             )}
             <Text
               style={[
@@ -66,22 +66,22 @@ export const AppTypeSelector: React.FC<AppTypeSelectorProps> = ({
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    paddingHorizontal: Theme.spacing.l,
+    paddingHorizontal: Theme.spacing.m,
     paddingTop: Theme.spacing.m,
-    paddingBottom: Theme.spacing.s,
-    gap: Theme.spacing.s,
+    paddingBottom: Theme.spacing.m,
+    gap: Theme.spacing.l,
   },
   tab: {
     flex: 1,
-    height: 48,
+    height: 60,
     borderRadius: 12,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    gap: Theme.spacing.xs,
+    gap: Theme.spacing.m,
   },
   activeTab: {
-    backgroundColor: Theme.colors.secondary, // Yellow
+    backgroundColor: Theme.colors.selectorActive,
   },
   inactiveTab: {
     backgroundColor: Theme.colors.white,
@@ -95,5 +95,12 @@ const styles = StyleSheet.create({
   },
   inactiveTabText: {
     color: Theme.colors.black,
+  },
+  tabIcon: {
+    width: 30,
+    height: 40,
+  },
+  tabIconInactive: {
+    opacity: 0.9,
   },
 });

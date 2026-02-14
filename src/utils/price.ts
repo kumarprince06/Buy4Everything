@@ -1,5 +1,9 @@
 /**
- * Price calculation utilities
+ * price.ts
+ *
+ * Price helpers used across product cards and product details.
+ * - formatPrice: formats number as "₹ <amount>" for display
+ * - calculateDiscountPercentage: (original - current) / original * 100
  */
 
 export const calculateDiscountPercentage = (originalPrice: number, currentPrice: number): number => {
@@ -8,5 +12,5 @@ export const calculateDiscountPercentage = (originalPrice: number, currentPrice:
 };
 
 export const formatPrice = (price: number): string => {
-  return `₹${price}`;
+  return `₹ ${price}`;
 };
