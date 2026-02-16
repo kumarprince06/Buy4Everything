@@ -45,7 +45,7 @@ export const AllCategoriesScreen = () => {
         },
       ]}
       onPress={() =>
-        navigation.navigate(Routes.CATEGORY_LIST, { categoryName: item.name })
+        navigation.navigate(Routes.PRODUCT_LIST, { categoryName: item.name })
       }
       activeOpacity={0.85}
     >

@@ -142,7 +142,7 @@ export const HomeScreen = () => {
             <TouchableOpacity
               style={styles.categoryItem}
               onPress={() =>
-                navigation.navigate(Routes.CATEGORY_LIST, {
+                navigation.navigate(Routes.PRODUCT_LIST, {
                   categoryName: item.name,
                 })
               }

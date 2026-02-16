@@ -7,10 +7,12 @@ import {
   Image,
   ImageSourcePropType,
 } from 'react-native';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Theme } from '../../theme';
 import { Icons } from '../../assets/icons';
 import { scale, moderateScale } from '../../utils/scale';
+import { Routes } from '../../navigation/routes';
 
 const TAB_ACTIVE = Theme.colors.primary;
 const TAB_INACTIVE = Theme.colors.tabInactive;
@@ -29,6 +31,12 @@ const TAB_ICONS: ImageSourcePropType[] = [
 const TAB_LABELS = ['Home', 'Cart', '', 'My Order', 'Profile'];
 
 export function CustomTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
+  const activeRoute = state.routes[state.index];
+  const focusedRouteName = getFocusedRouteNameFromRoute(activeRoute);
+  if (focusedRouteName === Routes.PRODUCT_DETAILS) {
+    return null;
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.bar}>
@@ -104,14 +112,26 @@ export function CustomTabBar({ state, descriptors, navigation }: BottomTabBarPro
   );
 }
 
+/** Tab bar shadow: #00000040 (black at 25% opacity) */
+const TAB_BAR_SHADOW = {
+  shadowColor: '#000000',
+  shadowOffset: { width: 0, height: -6   },
+  shadowOpacity: 0.25,
+  shadowRadius: 4,
+  elevation: 8,
+};
+
 const styles = StyleSheet.create({
   container: {
     paddingBottom: scale(16),
     paddingHorizontal: scale(8),
     backgroundColor: Theme.colors.white,
     paddingTop: scale(8),
+    overflow: 'visible',
+    ...TAB_BAR_SHADOW,
   },
   bar: {
+    overflow: 'visible',
     flexDirection: 'row',
     alignItems: 'flex-end',
     justifyContent: 'space-around',
@@ -134,7 +154,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
     marginBottom: scale(-4),
+    overflow: 'visible',
   },
+  /** Center green button – shadow #00000040 so it appears elevated */
   centerButton: {
     width: CENTER_BUTTON_SIZE,
     height: CENTER_BUTTON_SIZE,
@@ -142,11 +164,11 @@ const styles = StyleSheet.create({
     backgroundColor: Theme.colors.primary,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#000',
+    shadowColor: '#000000',
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
+    shadowOpacity: 0.25,
     shadowRadius: 8,
-    elevation: 8,
+    elevation: 12,
   },
   centerIcon: {},
   centerLabel: {

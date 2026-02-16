@@ -47,4 +47,8 @@ export const Colors = {
         blue: '#E3F2FD',
     },
     link: '#2DD4BF',
+    /** Single product: delivery time text (e.g. "30 minutes Delivery") */
+    deliveryTime: '#24B5D4',
+    badgeTextColor: '#BC0202',
+    badgeBackgroundColor: '#ED2A2A61',
 };

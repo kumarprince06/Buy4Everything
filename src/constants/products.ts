@@ -16,6 +16,22 @@
 import { Images } from '../assets/images';
 import { Product } from '../types';
 
+/** Fruits & Vegetables category list – 12 products with images from assets */
+export const FRUITS_VEGETABLES_PRODUCTS: Product[] = [
+  { id: 'fv1', name: 'fresho! Pomegranate, 1 kg', price: 218.08, weight: '1kg', image: Images.productPomegranate, categoryId: '1', rating: 4.8, reviewCount: 2800000 },
+  { id: 'fv2', name: 'Ratnagiri Alphonso Mango - 2 Pc', price: 199, weight: '2pc', image: Images.productMango, categoryId: '1', rating: 4.8, reviewCount: 2800000 },
+  { id: 'fv3', name: 'Fresh Tomato 1 kg', price: 18, weight: '1kg', image: Images.productTomato, categoryId: '1', rating: 4.8, reviewCount: 2800000 },
+  { id: 'fv4', name: 'Fresho Strawberry 200 g', price: 56, weight: '200gm', image: Images.productStrawberry, categoryId: '1', rating: 4.8, reviewCount: 2800000 },
+  { id: 'fv5', name: 'Onion 5 kg (Pack)', price: 220, weight: '5kg', image: Images.productOnion, categoryId: '1', rating: 4.8, reviewCount: 2800000 },
+  { id: 'fv6', name: 'Carrot Red 500GM', price: 39, weight: '500gm', image: Images.productCarrot, categoryId: '1', rating: 4.8, reviewCount: 2800000 },
+  { id: 'fv7', name: 'Fresho Broccoli 500 g', price: 39, weight: '500gm', image: Images.productBroccoli, categoryId: '1', rating: 4.8, reviewCount: 2800000 },
+  { id: 'fv8', name: 'fresho! Cucumber (Loose), 1 kg', price: 24, weight: '1kg', image: Images.productCucumber, categoryId: '1', rating: 4.8, reviewCount: 2800000 },
+  { id: 'fv9', name: 'Red Potato(1 kg)', price: 35, weight: '1kg', image: Images.productRedPotato, categoryId: '1', rating: 4.8, reviewCount: 2800000 },
+  { id: 'fv10', name: 'Fresho Litchi 1 kg', price: 193, originalPrice: 233, discountAmount: 40, weight: '1kg', image: Images.productLitchi, categoryId: '1', rating: 4.8, reviewCount: 2800000 },
+  { id: 'fv11', name: 'Order Healthy & Nutritious Veggie Combo', price: 116, weight: '5kg', image: Images.productVeggieCombo, categoryId: '1', rating: 4.8, reviewCount: 2800000 },
+  { id: 'fv12', name: 'Fruits & Vegetables Box - Sample', price: 750, weight: '10kg', image: Images.productFruitsVegBox, categoryId: '1', rating: 4.8, reviewCount: 2800000 },
+];
+
 /** Sample products for general use (e.g. product detail, cart) */
 export const MOCK_PRODUCTS: Product[] = [
   { 

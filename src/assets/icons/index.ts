@@ -13,6 +13,7 @@ export const Icons = {
     tabMyOrder: require('./Tab-myorder.png'),
     tabProfile: require('./Tab-Profile.png'),
     search: require('./search.png'),
+    filter: require('./filter-icon.png'),
     seeAll: require('./see-all.png'),
     star: require('./star.png'),
     /** Quantity control on product cards (add to cart state) */
