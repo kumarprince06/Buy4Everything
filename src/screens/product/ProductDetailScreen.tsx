@@ -33,6 +33,10 @@ import { Routes } from '../../navigation/routes';
 const DEFAULT_DESCRIPTION =
   'Hybrid tomatoes are a modern agricultural marvel, blending traditional farming wisdom with innovative techniques. These tomatoes, meticulously bred for resilience and yield, offer a perfect balance of flavour and nutrition.';
 
+const IMAGE_HEIGHT_RATIO = 0.75;
+const SIMILAR_PRODUCTS_LIMIT = 6;
+const DESCRIPTION_PREVIEW_LENGTH = 120;
+
 function formatReviewCount(count?: number): string {
   if (count == null || count < 1000) return count ? `${count}` : '0';
   if (count >= 1000000) return `${(count / 1000000).toFixed(1)}m`;
@@ -65,13 +69,14 @@ export const ProductDetailScreen = ({ route, navigation }: any) => {
 
   const similarProducts = FRUITS_VEGETABLES_PRODUCTS.filter(
     p => p.id !== product.id,
-  ).slice(0, 6);
+  ).slice(0, SIMILAR_PRODUCTS_LIMIT);
   const cardWidth = scale(140);
-  const imageHeight = width * 0.75;
+  const imageHeight = width * IMAGE_HEIGHT_RATIO;
 
   const descriptionText = product.description ?? DEFAULT_DESCRIPTION;
-  const shortDescription = descriptionText.slice(0, 120);
-  const showReadMore = descriptionText.length > 120 && !expandedDescription;
+  const shortDescription = descriptionText.slice(0, DESCRIPTION_PREVIEW_LENGTH);
+  const showReadMore =
+    descriptionText.length > DESCRIPTION_PREVIEW_LENGTH && !expandedDescription;
 
   return (
     <View style={styles.screen}>
@@ -380,7 +385,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: '100%',
     height: '100%',
-    backgroundColor: '#F6F6F6',
+    backgroundColor: Theme.colors.imagePlaceholder,
     paddingBottom: scale(20),
   },
   productImage: {
@@ -396,7 +401,7 @@ const styles = StyleSheet.create({
     backgroundColor: Theme.colors.white,
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#000000',
+    shadowColor: Theme.colors.shadow,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 4,
@@ -435,7 +440,7 @@ const styles = StyleSheet.create({
     width: scale(16),
   },
   dotInactive: {
-    backgroundColor: 'rgba(255,255,255,0.7)',
+    backgroundColor: Theme.colors.carouselDotInactive,
   },
   card: {
     backgroundColor: Theme.colors.white,
@@ -445,7 +450,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Theme.spacing.l,
     paddingTop: Theme.spacing.l,
     paddingBottom: Theme.spacing.xl,
-    shadowColor: '#000000',
+    shadowColor: Theme.colors.shadow,
     shadowOffset: { width: 0, height: -4 },
     shadowOpacity: 0.08,
     shadowRadius: 12,
@@ -540,14 +545,14 @@ const styles = StyleSheet.create({
   },
   tabBar: {
     flexDirection: 'row',
-    backgroundColor: '#D7FFD4',
+    backgroundColor: Theme.colors.tabBarBackground,
     borderRadius: 0,
     paddingTop: scale(4),
     paddingBottom: 0,
     paddingHorizontal: 0,
     marginHorizontal: -Theme.spacing.l,
     marginBottom: Theme.spacing.m,
-    shadowColor: '#000000',
+    shadowColor: Theme.colors.shadow,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.06,
     shadowRadius: 4,
@@ -570,11 +575,11 @@ const styles = StyleSheet.create({
   },
   tabDivider: {
     borderLeftWidth: 1,
-    borderLeftColor: '#8EFF86',
+    borderLeftColor: Theme.colors.tabDivider,
   },
   tabText: {
     ...Theme.typography.bodySmall,
-    color: '#636262',
+    color: Theme.colors.tabInactiveText,
     fontWeight: '500',
     fontSize: moderateScale(14),
   },
@@ -621,9 +626,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: Theme.spacing.l,
     paddingTop: scale(12),
     backgroundColor: Theme.colors.white,
-    shadowColor: '#0000001A',
+    shadowColor: Theme.colors.shadowLight,
     borderTopWidth: 1,
-    borderTopColor: '#0000001A',
+    borderTopColor: Theme.colors.shadowLight,
     shadowOffset: { width: 0, height: -4 },
     shadowOpacity: 0.05,
     shadowRadius: 4,
@@ -633,7 +638,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1.5,
-    borderColor: '#FFD500',
+    borderColor: Theme.colors.selectorActive,
     borderRadius: scale(12),
     backgroundColor: Theme.colors.white,
     padding: scale(6),
@@ -642,7 +647,7 @@ const styles = StyleSheet.create({
     width: scale(44),
     height: scale(44),
     borderRadius: scale(22),
-    backgroundColor: '#FFD500',
+    backgroundColor: Theme.colors.selectorActive,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -667,7 +672,7 @@ const styles = StyleSheet.create({
     borderRadius: scale(26),
     height: scale(52),
     gap: scale(8),
-    shadowColor: '#000000',
+    shadowColor: Theme.colors.shadow,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 6,

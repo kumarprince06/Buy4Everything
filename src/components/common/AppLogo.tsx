@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Image, StyleSheet, ViewStyle } from 'react-native';
+import { Theme } from '../../theme';
 import { Images } from '../../assets/images';
 import { scale } from '../../utils/scale';
 
@@ -25,17 +26,17 @@ interface AppLogoProps {
 const SIZES = {
   small: {
     basket: { width: scale(35), height: scale(35) },
-    separator: { height: scale(25), marginHorizontal: scale(10), width: 1, backgroundColor: 'rgba(255, 255, 255, 0.4)' as const },
+    separator: { height: scale(25), marginHorizontal: scale(10), width: 1, backgroundColor: Theme.colors.separatorLight as const },
     logo: { width: scale(120), height: scale(35) },
   },
   large: {
     basket: { width: scale(48), height: scale(48) },
-    separator: { height: scale(32), marginHorizontal: scale(12), width: 1, backgroundColor: 'rgba(255, 255, 255, 0.4)' as const },
+    separator: { height: scale(32), marginHorizontal: scale(12), width: 1, backgroundColor: Theme.colors.separatorLight as const },
     logo: { width: scale(160), height: scale(48) },
   },
   hero: {
     basket: { width: scale(55), height: scale(55) },
-    separator: { height: scale(45), marginHorizontal: scale(15), width: 2, backgroundColor: '#FFFFFF' as const },
+    separator: { height: scale(45), marginHorizontal: scale(15), width: 2, backgroundColor: Theme.colors.white as const },
     logo: { width: scale(200), height: scale(55) },
   },
 };

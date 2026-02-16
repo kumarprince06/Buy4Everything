@@ -118,23 +118,23 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 const styles = StyleSheet.create({
   container: {
     width: 160,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: Theme.colors.white,
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: '#EBFFE9',
+    borderColor: Theme.colors.productCardBorder,
     marginRight: Theme.spacing.m,
     overflow: 'hidden',
   },
   gridContainer: {
     marginRight: 0,
     marginBottom: Theme.spacing.m,
-    backgroundColor: '#FFFFFF',
-    borderColor: '#EBFFE9',
+    backgroundColor: Theme.colors.white,
+    borderColor: Theme.colors.productCardBorder,
   },
   imageContainer: {
     margin: Theme.spacing.xs,
     height: scale(120),
-    backgroundColor: '#F6F6F6',
+    backgroundColor: Theme.colors.imagePlaceholder,
     position: 'relative',
     borderRadius: 12,
   },

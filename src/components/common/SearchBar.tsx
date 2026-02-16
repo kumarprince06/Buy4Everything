@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   searchBarOnDark: {
     backgroundColor: Theme.colors.white,
     borderWidth: 0,
-    shadowColor: '#000',
+    shadowColor: Theme.colors.shadow,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.08,
     shadowRadius: 6,

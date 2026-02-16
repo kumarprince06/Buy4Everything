@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
   },
   /** Yellow highlight for "30" in delivery CTA */
   highlight: {
-    color: '#FFCC00',
+    color: Theme.colors.authYellow,
     fontWeight: 'bold',
   },
 });

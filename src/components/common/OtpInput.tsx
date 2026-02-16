@@ -16,8 +16,6 @@ interface OtpInputProps {
   variant?: 'default' | 'green';
 }
 
-const OTP_YELLOW_FILLED = '#FFF4CC';
-const OTP_BORDER_GREEN = 'rgba(255,255,255,0.4)';
 
 export const OtpInput: React.FC<OtpInputProps> = ({
   length = 6,
@@ -90,7 +88,7 @@ export const OtpInput: React.FC<OtpInputProps> = ({
             ]}
             value={digit}
             placeholder={isGreen && !digit ? '•' : undefined}
-            placeholderTextColor="rgba(0,0,0,0.25)"
+            placeholderTextColor={Theme.colors.overlayLight}
             onChangeText={(text) => handleChange(text, index)}
             onKeyPress={({ nativeEvent }) => handleKeyPress(nativeEvent.key, index)}
             onFocus={() => handleFocus(index)}
@@ -135,16 +133,16 @@ const styles = StyleSheet.create({
     backgroundColor: Theme.colors.white,
   },
   otpBoxGreen: {
-    borderColor: OTP_BORDER_GREEN,
+    borderColor: Theme.colors.otpBorder,
     backgroundColor: Theme.colors.white,
   },
   otpBoxGreenEmpty: {
     backgroundColor: Theme.colors.white,
-    borderColor: OTP_BORDER_GREEN,
+    borderColor: Theme.colors.otpBorder,
   },
   otpBoxGreenFilled: {
-    backgroundColor: OTP_YELLOW_FILLED,
-    borderColor: OTP_YELLOW_FILLED,
+    backgroundColor: Theme.colors.otpFilled,
+    borderColor: Theme.colors.otpFilled,
     color: Theme.colors.black,
   },
 });

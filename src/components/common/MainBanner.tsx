@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     marginBottom: Theme.spacing.m,
     height: scale(180),
     borderRadius: scale(16),
-    backgroundColor: '#E8F5E9', // Light green background
+    backgroundColor: Theme.colors.categoryBg.green,
     flexDirection: 'row',
     padding: Theme.spacing.l,
     overflow: 'hidden',

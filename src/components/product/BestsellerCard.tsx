@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   /** Image area; discount badge and cart button overlay here */
   imageContainer: {
     height: scale(150),
-    backgroundColor: '#F5F5F5',
+    backgroundColor: Theme.colors.surfaceLight,
     position: 'relative',
   },
   productImage: {

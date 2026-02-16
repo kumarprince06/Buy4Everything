@@ -150,15 +150,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(12),
     paddingVertical: scale(12),
     borderRadius: scale(10),
-    backgroundColor: '#EDF2F7',
+    backgroundColor: Theme.colors.chipBackground,
     borderWidth: scale(1),
-    borderColor: '#EBFFE9',
+    borderColor: Theme.colors.productCardBorder,
     minHeight: scale(44),
     height: scale(44),
   },
   chipActive: {
     backgroundColor: Theme.colors.primary,
-    borderColor: '#EBFFE9',
+    borderColor: Theme.colors.productCardBorder,
   },
   chipIconWrap: {
     width: scale(30),

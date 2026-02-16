@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { Theme } from '../../theme';
 import { scale, moderateScale } from '../../utils/scale';
 
 interface PercentOffBadgeProps {
@@ -22,21 +23,21 @@ const styles = StyleSheet.create({
     width: SIZE,
     height: SIZE,
     borderRadius: SIZE / 2,
-    backgroundColor: '#D32F2F',
+    backgroundColor: Theme.colors.percentOffBadge,
     borderWidth: 1.5,
-    borderColor: '#FFFFFF',
+    borderColor: Theme.colors.white,
     justifyContent: 'center',
     alignItems: 'center',
   },
   percent: {
     fontSize: moderateScale(15),
     fontWeight: '800',
-    color: '#FFFFFF',
+    color: Theme.colors.white,
   },
   off: {
     fontSize: moderateScale(8),
     fontWeight: '700',
-    color: '#FFFFFF',
+    color: Theme.colors.white,
     marginTop: 0,
   },
 });

@@ -2,7 +2,7 @@
  * ProductListHeader.tsx
  *
  * App Navigator for Product List: white bar, back + left-aligned title + search + filter.
- * Border below header (#ECECEC). Filter chips and data show below.
+ * Border below header (Theme.colors.headerBorder). Filter chips and data show below.
  */
 
 import React from 'react';
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     paddingBottom: scale(8),
     backgroundColor: Theme.colors.white,
     borderBottomWidth: 1,
-    borderBottomColor: '#ECECEC',
+    borderBottomColor: Theme.colors.headerBorder,
   },
   backButton: {
     width: scale(40),
@@ -78,12 +78,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: Theme.spacing.xs,
   },
-  /** Same as All Categories: light green circle, primary icon (Figma #D7FFD4) */
+  /** Search/filter circle: Theme.colors.searchFilterCircle, primary icon */
   searchButton: {
     width: scale(40),
     height: scale(40),
     borderRadius: scale(20),
-    backgroundColor: '#D7FFD4',
+    backgroundColor: Theme.colors.searchFilterCircle,
     justifyContent: 'center',
     alignItems: 'center',
   },

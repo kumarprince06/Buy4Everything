@@ -112,9 +112,8 @@ export function CustomTabBar({ state, descriptors, navigation }: BottomTabBarPro
   );
 }
 
-/** Tab bar shadow: #00000040 (black at 25% opacity) */
 const TAB_BAR_SHADOW = {
-  shadowColor: '#000000',
+  shadowColor: Theme.colors.shadow,
   shadowOffset: { width: 0, height: -6   },
   shadowOpacity: 0.25,
   shadowRadius: 4,
@@ -156,7 +155,6 @@ const styles = StyleSheet.create({
     marginBottom: scale(-4),
     overflow: 'visible',
   },
-  /** Center green button – shadow #00000040 so it appears elevated */
   centerButton: {
     width: CENTER_BUTTON_SIZE,
     height: CENTER_BUTTON_SIZE,
@@ -164,7 +162,7 @@ const styles = StyleSheet.create({
     backgroundColor: Theme.colors.primary,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#000000',
+    shadowColor: Theme.colors.shadow,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.25,
     shadowRadius: 8,

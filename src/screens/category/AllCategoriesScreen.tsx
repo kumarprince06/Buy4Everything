@@ -141,12 +141,12 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginLeft: scale(4),
   },
-  /** Search: bg #D7FFD4, icon primary, no border (Figma) */
+  /** Search: Theme.colors.searchFilterCircle, primary icon */
   searchButton: {
     width: scale(40),
     height: scale(40),
     borderRadius: scale(20),
-    backgroundColor: '#D7FFD4',
+    backgroundColor: Theme.colors.searchFilterCircle,
     justifyContent: 'center',
     alignItems: 'center',
   },

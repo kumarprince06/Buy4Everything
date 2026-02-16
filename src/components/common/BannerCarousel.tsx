@@ -77,7 +77,7 @@ export const BannerCarousel: React.FC<BannerCarouselProps> = ({
             { transform: [{ scale }] },
           ]}
         >
-          <View style={[styles.banner, { backgroundColor: banner.backgroundColor || '#E8F5E9' }]}>
+          <View style={[styles.banner, { backgroundColor: banner.backgroundColor || Theme.colors.categoryBg.green }]}>
         <View style={styles.content}>
           <Text style={styles.title}>{banner.title}</Text>
           <Text style={styles.subtitle}>{banner.subtitle}</Text>
