@@ -14,6 +14,7 @@ import { Theme } from '../../theme';
 import { Images } from '../../assets/images';
 import { Product } from '../../types';
 import { formatPrice } from '../../utils/price';
+import { scale, moderateScale } from '../../utils/scale';
 import { Icons } from '../../assets/icons';
 
 /** Props for the Bestseller/Shop-by-Offer product card */
@@ -41,7 +42,7 @@ export const BestsellerCard: React.FC<BestsellerCardProps> = ({ product, onPress
     <TouchableOpacity style={styles.container} onPress={onPress} activeOpacity={0.9}>
       <View style={styles.imageContainer}>
         {product.image ? (
-          <Image source={product.image} style={styles.productImage} resizeMode="cover" />
+          <Image source={product.image} style={styles.productImage} resizeMode="contain" />
         ) : (
           <Image source={Images.productPlaceholder} style={styles.productImage} resizeMode="cover" />
         )}
@@ -85,46 +86,51 @@ export const BestsellerCard: React.FC<BestsellerCardProps> = ({ product, onPress
 };
 
 const styles = StyleSheet.create({
-  /** Card wrapper; fixed width for horizontal scroll */
+  /** Card wrapper; width scales with screen for horizontal scroll */
   container: {
-    width: 140,
+    width: scale(140),
     backgroundColor: Theme.colors.white,
-    borderRadius: 12,
+    borderRadius: scale(12),
     marginRight: Theme.spacing.m,
     overflow: 'hidden',
   },
   /** Image area; discount badge and cart button overlay here */
   imageContainer: {
-    height: 140,
+    height: scale(150),
     backgroundColor: '#F5F5F5',
     position: 'relative',
   },
   productImage: {
-    width: '100%',
-    height: '100%',
+    width: '75%',
+    height: '75%',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 'auto',
+    marginBottom: 'auto',
   },
   discountBadge: {
     position: 'absolute',
-    top: 8,
-    left: 8,
+    top: scale(8),
+    left: scale(8),
     backgroundColor: Theme.colors.secondary,
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 6,
+    paddingHorizontal: scale(8),
+    paddingVertical: scale(4),
+    borderRadius: scale(6),
   },
   discountText: {
     ...Theme.typography.caption,
     color: Theme.colors.black,
     fontWeight: '700',
-    fontSize: 10,
+    fontSize: moderateScale(10),
   },
   cartButton: {
     position: 'absolute',
-    bottom: 6,
-    right: 6,
-    width: 32,
-    height: 32,
-    borderRadius: 16,
+    bottom: scale(6),
+    right: scale(6),
+    width: scale(32),
+    height: scale(32),
+    borderRadius: scale(16),
     backgroundColor: Theme.colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
@@ -132,31 +138,31 @@ const styles = StyleSheet.create({
   /** Quantity control pill: delete | number | plus (when item added to cart) */
   quantityControl: {
     position: 'absolute',
-    bottom: 6,
-    right: 6,
+    bottom: scale(6),
+    right: scale(6),
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: Theme.colors.primary,
-    borderRadius: 20,
-    paddingVertical: 4,
-    paddingHorizontal: 6,
-    gap: 8,
+    borderRadius: scale(20),
+    paddingVertical: scale(4),
+    paddingHorizontal: scale(6),
+    gap: scale(8),
   },
   quantityControlBtn: {
-    padding: 4,
+    padding: scale(4),
     justifyContent: 'center',
     alignItems: 'center',
   },
   quantityControlIcon: {
-    width: 16,
-    height: 16,
+    width: scale(16),
+    height: scale(16),
     tintColor: Theme.colors.white,
   },
   quantityControlNumber: {
-    fontSize: 14,
+    fontSize: moderateScale(14),
     fontWeight: '700',
     color: Theme.colors.white,
-    minWidth: 18,
+    minWidth: scale(18),
     textAlign: 'center',
   },
   /** Name, rating, price below image */
@@ -165,36 +171,36 @@ const styles = StyleSheet.create({
   },
   productName: {
     ...Theme.typography.bodyMedium,
-    fontSize: 16,
+    fontSize: moderateScale(16),
     fontWeight: '600',
     color: Theme.colors.text,
-    marginBottom: 4,
+    marginBottom: scale(4),
   },
   ratingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 4,
-    gap: 4,
+    marginBottom: scale(4),
+    gap: scale(4),
   },
   starIcon: {
-    width: 14,
-    height: 14,
+    width: scale(14),
+    height: scale(14),
     tintColor: Theme.colors.secondary,
   },
   ratingText: {
     ...Theme.typography.caption,
-    fontSize: 11,
+    fontSize: moderateScale(11),
     color: Theme.colors.textSecondary,
   },
   price: {
     ...Theme.typography.bodyMedium,
     fontWeight: '700',
     color: Theme.colors.text,
-    fontSize: 16,
+    fontSize: moderateScale(16),
   },
   cartIcon: {
-    width: 18,
-    height: 18,
+    width: scale(18),
+    height: scale(18),
     tintColor: Theme.colors.white,
   },
 });

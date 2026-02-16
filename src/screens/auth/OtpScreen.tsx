@@ -17,6 +17,7 @@ import { Theme } from '../../theme';
 import { Routes } from '../../navigation/routes';
 import { Images } from '../../assets/images';
 import { Icons } from '../../assets/icons';
+import { scale, moderateScale } from '../../utils/scale';
 
 const { width, height } = Dimensions.get('window');
 const RESEND_COUNTDOWN_SECONDS = 90;
@@ -164,74 +165,74 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     width: width * 0.95,
     height: height * 0.22,
-    maxHeight: 180,
-    marginBottom: 320,
+    maxHeight: scale(180),
+    marginBottom: scale(320),
   },
   groupImage: {
     width: width,
     height: height * 0.22,
-    maxHeight: 180,
+    maxHeight: scale(180),
   },
   content: {
     flex: 1,
-    paddingHorizontal: 25,
-    paddingTop: 16,
+    paddingHorizontal: scale(25),
+    paddingTop: scale(16),
     zIndex: 1,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 80,
+    marginBottom: scale(80),
   },
   backButton: {
     paddingLeft: 0,
-    paddingVertical: 4,
-    paddingRight: 8,
-    marginRight: 4,
+    paddingVertical: scale(4),
+    paddingRight: scale(8),
+    marginRight: scale(4),
   },
   backArrowText: {
-    width: 24,
-    height: 24,
+    width: scale(24),
+    height: scale(24),
     tintColor: Theme.colors.white,
   },
   headerTitle: {
-    fontSize: 18,
+    fontSize: moderateScale(18),
     fontWeight: '600',
     color: Theme.colors.white,
   },
   title: {
     ...Theme.typography.h1,
     color: Theme.colors.white,
-    fontSize: 22,
+    fontSize: moderateScale(22),
     fontWeight: '700',
-    marginBottom: 20,
+    marginBottom: scale(20),
   },
   subtitle: {
     ...Theme.typography.bodyMedium,
     color: Theme.colors.white,
-    fontSize: 14,
+    fontSize: moderateScale(14),
     opacity: 0.9,
-    marginBottom: 70,
+    marginBottom: scale(80),
   },
   verifyButton: {
-    height: 56,
-    borderRadius: 12,
-    marginTop: 24,
-    marginBottom: 16,
+    height: scale(56),
+    borderRadius: scale(12),
+    marginTop: scale(24),
+    marginBottom: scale(16),
   },
   verifyButtonText: {
     color: Theme.colors.black,
     fontWeight: '700',
-    fontSize: 16,
+    fontSize: moderateScale(16),
   },
   resendContainer: {
     alignItems: 'center',
-    marginBottom: 60,
+    marginBottom: scale(60),
   },
   resendText: {
     ...Theme.typography.bodyMedium,
     color: Theme.colors.white,
-    fontSize: 14,
+    fontSize: moderateScale(14),
   },
   resendLink: {
     color: Theme.colors.secondary,
@@ -242,16 +243,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 6,
+    gap: scale(6),
   },
   timerText: {
     color: Theme.colors.white,
-    fontSize: 14,
+    fontSize: moderateScale(14),
     fontWeight: '500',
   },
   timeImage: {
-    width: 18,
-    height: 18,
+    width: scale(18),
+    height: scale(18),
     tintColor: Theme.colors.white,
   },
 });

@@ -1,44 +1,45 @@
 import { TextStyle } from 'react-native';
+import { moderateScale } from '../utils/scale';
 
 export const Typography: Record<string, TextStyle> = {
     h1: {
-        fontSize: 24,
+        fontSize: moderateScale(24),
         fontWeight: '700',
-        lineHeight: 32,
+        lineHeight: moderateScale(32),
     },
     h2: {
-        fontSize: 20,
+        fontSize: moderateScale(20),
         fontWeight: '700',
-        lineHeight: 28,
+        lineHeight: moderateScale(28),
     },
     h3: {
-        fontSize: 18,
+        fontSize: moderateScale(18),
         fontWeight: '600',
-        lineHeight: 24,
+        lineHeight: moderateScale(24),
     },
     bodyLarge: {
-        fontSize: 16,
+        fontSize: moderateScale(16),
         fontWeight: '400',
-        lineHeight: 24,
+        lineHeight: moderateScale(24),
     },
     bodyMedium: {
-        fontSize: 14,
+        fontSize: moderateScale(14),
         fontWeight: '400',
-        lineHeight: 20,
+        lineHeight: moderateScale(20),
     },
     bodySmall: {
-        fontSize: 12,
+        fontSize: moderateScale(12),
         fontWeight: '400',
-        lineHeight: 16,
+        lineHeight: moderateScale(16),
     },
     button: {
-        fontSize: 16,
+        fontSize: moderateScale(16),
         fontWeight: '600',
-        lineHeight: 24,
+        lineHeight: moderateScale(24),
     },
     caption: {
-        fontSize: 10,
+        fontSize: moderateScale(10),
         fontWeight: '400',
-        lineHeight: 12,
+        lineHeight: moderateScale(12),
     },
 };

@@ -10,6 +10,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Theme } from '../../theme';
 import { Icons } from '../../assets/icons';
+import { scale } from '../../utils/scale';
 
 /** Props: title (required), optional see-all callback and visibility */
 interface SectionHeaderProps {
@@ -59,8 +60,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   seeAllIcon: {
-    width: 16,
-    height: 16,
-    // tintColor: Theme.colors.primary,
+    width: scale(16),
+    height: scale(16),
   },
 });

@@ -47,6 +47,7 @@ import {
   EXPLORE_TRENDING_PRODUCTS,
 } from '../../constants/products';
 import { MAIN_BANNERS } from '../../constants/banners';
+import { scale, moderateScale } from '../../utils/scale';
 
 /** Grid layout: 4 columns for trending products */
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -279,8 +280,8 @@ const styles = StyleSheet.create({
   greenHeader: {
     backgroundColor: Theme.colors.primary,
     paddingBottom: Theme.spacing.xl,
-    borderBottomLeftRadius: 28,
-    borderBottomRightRadius: 28,
+    borderBottomLeftRadius: scale(28),
+    borderBottomRightRadius: scale(28),
   },
   userSection: {
     paddingHorizontal: Theme.spacing.l,
@@ -289,7 +290,7 @@ const styles = StyleSheet.create({
   },
   greeting: {
     ...Theme.typography.h2,
-    fontSize: 22,
+    fontSize: moderateScale(22),
     fontWeight: '700',
     color: Theme.colors.white,
     marginBottom: Theme.spacing.xs,
@@ -303,16 +304,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   locationIcon: {
-    width: 18,
-    height: 18,
-    marginRight: 6,
+    width: scale(18),
+    height: scale(18),
+    marginRight: scale(6),
     tintColor: Theme.colors.primary,
   },
   locationTextAndIcon: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 4,
+    gap: scale(4),
     minWidth: 0,
   },
   locationText: {
@@ -325,13 +326,14 @@ const styles = StyleSheet.create({
     minWidth: 0,
   },
   expandDownIcon: {
-    width: 12,
-    height: 12,
+    width: scale(12),
+    height: scale(12),
     tintColor: Theme.colors.white,
   },
   carouselOverlap: {
     marginTop: -Theme.spacing.xl,
     zIndex: 1,
+    marginBottom: Theme.spacing.l,
   },
   categorySection: {
     backgroundColor: Theme.colors.categoriesSection,
@@ -346,9 +348,9 @@ const styles = StyleSheet.create({
     marginRight: Theme.spacing.l,
   },
   categoryCircleOuter: {
-    width: 72,
-    height: 72,
-    borderRadius: 36,
+    width: scale(72),
+    height: scale(72),
+    borderRadius: scale(36),
     backgroundColor: Theme.colors.white,
     justifyContent: 'center',
     alignItems: 'center',
@@ -360,26 +362,24 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   categoryCircleInner: {
-    width: 58,
-    height: 58,
-    borderRadius: 29,
-    // backgroundColor: Theme.colors.secondary,
+    width: scale(58),
+    height: scale(58),
+    borderRadius: scale(29),
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
   },
   categoryImage: {
-    width: 60,
-    height: 60,
+    width: scale(60),
+    height: scale(60),
     opacity: 1,
-    // No tintColor so category icons display in full color (Figma)
   },
   categoryName: {
     ...Theme.typography.caption,
     fontWeight: '600',
     textAlign: 'center',
-    width: 72,
-    fontSize: 11,
+    width: scale(72),
+    fontSize: moderateScale(11),
     color: Theme.colors.text,
   },
   productList: {
@@ -408,7 +408,7 @@ const styles = StyleSheet.create({
   trendingGridImageWrap: {
     width: '100%',
     aspectRatio: 1,
-    borderRadius: 12,
+    borderRadius: scale(12),
     backgroundColor: Theme.colors.white,
     overflow: 'hidden',
     justifyContent: 'center',
@@ -420,33 +420,32 @@ const styles = StyleSheet.create({
   },
   trendingGridName: {
     ...Theme.typography.caption,
-    fontSize: 11,
+    fontSize: moderateScale(11),
     fontWeight: '600',
     color: Theme.colors.text,
     marginTop: Theme.spacing.xs,
-    paddingHorizontal: 2,
+    paddingHorizontal: scale(2),
   },
   trendingGridPrice: {
     ...Theme.typography.caption,
-    fontSize: 12,
+    fontSize: moderateScale(12),
     fontWeight: '700',
     color: Theme.colors.primary,
-    marginTop: 2,
+    marginTop: scale(2),
   },
   middleBannerContainer: {
-    marginHorizontal: Theme.spacing.l,
     marginBottom: Theme.spacing.xs,
-    borderRadius: 16,
+    borderRadius: scale(16),
     overflow: 'hidden',
   },
   middleBannerImage: {
     width: '100%',
-    height: 150,
+    height: scale(150),
   },
   locationPin: {
-    width: 18,
-    height: 18,
-    marginRight: 6,
+    width: scale(18),
+    height: scale(18),
+    marginRight: scale(6),
     tintColor: Theme.colors.white,
   },
 });

@@ -10,6 +10,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Theme } from '../../theme';
 import { Images } from '../../assets/images';
+import { scale } from '../../utils/scale';
 
 interface Tab {
   id: string;
@@ -73,8 +74,8 @@ const styles = StyleSheet.create({
   },
   tab: {
     flex: 1,
-    height: 60,
-    borderRadius: 12,
+    height: scale(60),
+    borderRadius: scale(12),
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -97,8 +98,8 @@ const styles = StyleSheet.create({
     color: Theme.colors.black,
   },
   tabIcon: {
-    width: 30,
-    height: 40,
+    width: scale(30),
+    height: scale(40),
   },
   tabIconInactive: {
     opacity: 0.9,

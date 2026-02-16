@@ -21,6 +21,7 @@ import { Theme } from '../../theme';
 import { Routes } from '../../navigation/routes';
 import { Images } from '../../assets/images';
 import { AppLogo } from '../../components/common/AppLogo';
+import { scale, moderateScale } from '../../utils/scale';
 
 const { width, height } = Dimensions.get('window');
 
@@ -202,23 +203,23 @@ const styles = StyleSheet.create({
   /** Footer container for welcome text */
   footer: {
     alignItems: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: scale(25),
     zIndex: 3,
   },
   /** "Welcome To Our Store" heading */
   welcomeTitle: {
     ...Theme.typography.h1,
     color: Theme.colors.white,
-    fontSize: 32,
+    fontSize: moderateScale(32),
     fontWeight: '800',
-    marginBottom: 10,
+    marginBottom: scale(10),
     textAlign: 'center',
   },
   /** "Get your delivery in ..." subtitle */
   welcomeSub: {
     ...Theme.typography.bodyLarge,
     color: Theme.colors.white,
-    fontSize: 16,
+    fontSize: moderateScale(16),
     opacity: 0.9,
     textAlign: 'center',
   },

@@ -10,12 +10,13 @@ import {
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Theme } from '../../theme';
 import { Icons } from '../../assets/icons';
+import { scale, moderateScale } from '../../utils/scale';
 
 const TAB_ACTIVE = Theme.colors.primary;
 const TAB_INACTIVE = Theme.colors.tabInactive;
-const ICON_SIZE = 24;
-const CENTER_BUTTON_SIZE = 56;
-const CENTER_ICON_SIZE = 28;
+const ICON_SIZE = scale(24);
+const CENTER_BUTTON_SIZE = scale(56);
+const CENTER_ICON_SIZE = scale(28);
 
 const TAB_ICONS: ImageSourcePropType[] = [
   Icons.tabHome,
@@ -105,34 +106,34 @@ export function CustomTabBar({ state, descriptors, navigation }: BottomTabBarPro
 
 const styles = StyleSheet.create({
   container: {
-    paddingBottom: 16,
-    paddingHorizontal: 8,
+    paddingBottom: scale(16),
+    paddingHorizontal: scale(8),
     backgroundColor: Theme.colors.white,
-    paddingTop: 8,
+    paddingTop: scale(8),
   },
   bar: {
     flexDirection: 'row',
     alignItems: 'flex-end',
     justifyContent: 'space-around',
-    height: 56,
+    height: scale(56),
   },
   tab: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-end',
-    paddingBottom: 4,
+    paddingBottom: scale(4),
   },
   icon: {},
   label: {
-    fontSize: 11,
-    marginTop: 4,
+    fontSize: moderateScale(11),
+    marginTop: scale(4),
     fontWeight: '500',
   },
   centerWrap: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-end',
-    marginBottom: -4,
+    marginBottom: scale(-4),
   },
   centerButton: {
     width: CENTER_BUTTON_SIZE,
@@ -149,8 +150,8 @@ const styles = StyleSheet.create({
   },
   centerIcon: {},
   centerLabel: {
-    fontSize: 11,
-    marginTop: 6,
+    fontSize: moderateScale(11),
+    marginTop: scale(6),
     fontWeight: '500',
   },
 });

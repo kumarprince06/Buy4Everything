@@ -9,6 +9,7 @@ import {
   KeyboardTypeOptions,
 } from 'react-native';
 import { Theme } from '../../theme';
+import { scale } from '../../utils/scale';
 
 interface AppInputProps {
   label?: string;
@@ -83,11 +84,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: Theme.colors.surface,
-    borderRadius: 12,
+    borderRadius: scale(12),
     borderWidth: 1,
     borderColor: Theme.colors.border,
     paddingHorizontal: Theme.spacing.m,
-    height: 52,
+    height: scale(52),
   },
   input: {
     flex: 1,

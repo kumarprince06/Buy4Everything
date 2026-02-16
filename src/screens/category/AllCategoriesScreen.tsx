@@ -23,9 +23,10 @@ import { Theme } from '../../theme';
 import { Icons } from '../../assets/icons';
 import { Routes } from '../../navigation/routes';
 import { ALL_CATEGORIES, AllCategoryItem } from '../../constants/allCategories';
+import { scale, moderateScale } from '../../utils/scale';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
-const CARD_GAP = 12;
+const CARD_GAP = scale(12);
 const PADDING_H = Theme.spacing.l;
 const NUM_COLUMNS = 2;
 const CARD_WIDTH = (SCREEN_WIDTH - PADDING_H * 2 - CARD_GAP) / NUM_COLUMNS;
@@ -124,34 +125,34 @@ const styles = StyleSheet.create({
     minWidth: 0,
   },
   headerBackBtn: {
-    width: 40,
-    height: 40,
+    width: scale(40),
+    height: scale(40),
     justifyContent: 'center',
     alignItems: 'flex-start',
   },
   backIcon: {
-    width: 24,
-    height: 24,
+    width: scale(24),
+    height: scale(24),
     tintColor: Theme.colors.text,
   },
   headerTitle: {
     ...Theme.typography.h3,
     color: Theme.colors.text,
     fontWeight: '700',
-    marginLeft: 4,
+    marginLeft: scale(4),
   },
   /** Search: bg #D7FFD4, icon primary, no border (Figma) */
   searchButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: scale(40),
+    height: scale(40),
+    borderRadius: scale(20),
     backgroundColor: '#D7FFD4',
     justifyContent: 'center',
     alignItems: 'center',
   },
   searchIcon: {
-    width: 20,
-    height: 20,
+    width: scale(20),
+    height: scale(20),
   },
   gridContent: {
     paddingHorizontal: PADDING_H,
@@ -164,9 +165,9 @@ const styles = StyleSheet.create({
   },
   card: {
     width: CARD_WIDTH,
-    borderRadius: 16,
+    borderRadius: scale(16),
     padding: Theme.spacing.m,
-    minHeight: 100,
+    minHeight: scale(100),
     overflow: 'hidden',
   },
   cardContent: {
@@ -182,28 +183,27 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     ...Theme.typography.bodyMedium,
-    fontSize: 18,
-    // width: '75%',
-    lineHeight: 22,
+    fontSize: moderateScale(18),
+    lineHeight: moderateScale(22),
     fontWeight: '700',
     width: '75%',
     color: Theme.colors.text,
-    marginBottom: 4,
+    marginBottom: scale(4),
   },
   cardCount: {
     ...Theme.typography.caption,
-    fontSize: 11,
+    fontSize: moderateScale(11),
     color: Theme.colors.textSecondary,
     maxWidth: '75%',
-    lineHeight: 13,
+    lineHeight: moderateScale(13),
   },
   /** Rounded image area on right of card (Figma) */
   cardImageWrap: {
     position: 'absolute',
-    right: -55,
-    bottom: -5,
-    width: 100,
-    height: 100,
+    right: scale(-55),
+    bottom: scale(-5),
+    width: scale(100),
+    height: scale(100),
     overflow: 'hidden',
     justifyContent: 'center',
     alignItems: 'center',

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Image, StyleSheet, ViewStyle } from 'react-native';
 import { Images } from '../../assets/images';
+import { scale } from '../../utils/scale';
 
 interface AppLogoProps {
   /** Optional style for the logo row container */
@@ -23,19 +24,19 @@ interface AppLogoProps {
 
 const SIZES = {
   small: {
-    basket: { width: 35, height: 35 },
-    separator: { height: 25, marginHorizontal: 10, width: 1, backgroundColor: 'rgba(255, 255, 255, 0.4)' as const },
-    logo: { width: 120, height: 35 },
+    basket: { width: scale(35), height: scale(35) },
+    separator: { height: scale(25), marginHorizontal: scale(10), width: 1, backgroundColor: 'rgba(255, 255, 255, 0.4)' as const },
+    logo: { width: scale(120), height: scale(35) },
   },
   large: {
-    basket: { width: 48, height: 48 },
-    separator: { height: 32, marginHorizontal: 12, width: 1, backgroundColor: 'rgba(255, 255, 255, 0.4)' as const },
-    logo: { width: 160, height: 48 },
+    basket: { width: scale(48), height: scale(48) },
+    separator: { height: scale(32), marginHorizontal: scale(12), width: 1, backgroundColor: 'rgba(255, 255, 255, 0.4)' as const },
+    logo: { width: scale(160), height: scale(48) },
   },
   hero: {
-    basket: { width: 55, height: 55 },
-    separator: { height: 45, marginHorizontal: 15, width: 2, backgroundColor: '#FFFFFF' as const },
-    logo: { width: 200, height: 55 },
+    basket: { width: scale(55), height: scale(55) },
+    separator: { height: scale(45), marginHorizontal: scale(15), width: 2, backgroundColor: '#FFFFFF' as const },
+    logo: { width: scale(200), height: scale(55) },
   },
 };
 

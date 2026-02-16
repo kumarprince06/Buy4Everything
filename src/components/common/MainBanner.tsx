@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ImageSourcePropType } from 'react-native';
 import { Theme } from '../../theme';
+import { scale, moderateScale } from '../../utils/scale';
 
 interface MainBannerProps {
   title: string;
@@ -37,8 +38,8 @@ const styles = StyleSheet.create({
   container: {
     marginHorizontal: Theme.spacing.l,
     marginBottom: Theme.spacing.m,
-    height: 180,
-    borderRadius: 16,
+    height: scale(180),
+    borderRadius: scale(16),
     backgroundColor: '#E8F5E9', // Light green background
     flexDirection: 'row',
     padding: Theme.spacing.l,
@@ -52,14 +53,14 @@ const styles = StyleSheet.create({
   },
   title: {
     ...Theme.typography.h1,
-    fontSize: 28,
+    fontSize: moderateScale(28),
     fontWeight: '700',
     color: Theme.colors.text,
     marginBottom: Theme.spacing.xs,
   },
   subtitle: {
     ...Theme.typography.bodyLarge,
-    fontSize: 16,
+    fontSize: moderateScale(16),
     color: Theme.colors.textSecondary,
     marginBottom: Theme.spacing.m,
   },
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
     backgroundColor: Theme.colors.primary,
     paddingHorizontal: Theme.spacing.l,
     paddingVertical: Theme.spacing.s,
-    borderRadius: 8,
+    borderRadius: scale(8),
     alignSelf: 'flex-start',
   },
   buttonText: {
@@ -77,10 +78,10 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     position: 'absolute',
-    right: -30,
-    bottom: -20,
-    width: 200,
-    height: 200,
+    right: scale(-30),
+    bottom: scale(-20),
+    width: scale(200),
+    height: scale(200),
   },
   image: {
     width: '100%',

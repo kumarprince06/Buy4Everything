@@ -20,6 +20,8 @@ import { Images } from '../../assets/images';
 import { Icons } from '../../assets/icons';
 import { Product } from '../../types';
 import { formatPrice } from '../../utils/price';
+import { scale, moderateScale } from '../../utils/scale';
+import { PercentOffBadge } from './PercentOffBadge';
 
 /** Props for the City Best Seller product card */
 interface CityBestSellerCardProps {
@@ -52,9 +54,7 @@ export const CityBestSellerCard: React.FC<CityBestSellerCardProps> = ({ product,
             <Image source={Images.newTag} style={styles.newTagImage} resizeMode="contain" />
           )}
           {product.discountPercentage && !product.isNew && (
-            <View style={styles.discountBadge}>
-              <Text style={styles.discountText}>{product.discountPercentage}% OFF</Text>
-            </View>
+            <PercentOffBadge percentage={product.discountPercentage} />
           )}
         </View>
         {/* Details outside border: name, price row (price + ADD or quantity control on same row) */}
@@ -90,9 +90,9 @@ export const CityBestSellerCard: React.FC<CityBestSellerCardProps> = ({ product,
 };
 
 const styles = StyleSheet.create({
-  /** Outer touchable; fixed width for horizontal list */
+  /** Outer touchable; width scales with screen for horizontal list */
   container: {
-    width: 160,
+    width: scale(160),
     marginRight: Theme.spacing.m,
   },
   /** Card content: no border; details sit below image */
@@ -102,12 +102,12 @@ const styles = StyleSheet.create({
   /** Bordered area: only the image has border; image is fully visible (contain) */
   imageContainer: {
     width: '100%',
-    height: 150,
+    height: scale(150),
     backgroundColor: Theme.colors.cardBackgroundMint,
     position: 'relative',
     borderWidth: 1,
     borderColor: Theme.colors.cardBorderColor,
-    borderRadius: 20,
+    borderRadius: scale(20),
     overflow: 'hidden',
   },
   productImage: {
@@ -125,37 +125,22 @@ const styles = StyleSheet.create({
   newTagImage: {
     position: 'absolute',
     top: 0,
-    left: -10,
-    width: 50,
-    height: 30,
+    left: scale(-10),
+    width: scale(50),
+    height: scale(30),
   },
   /** Red badge for discount percentage (e.g. 25% OFF) */
-  discountBadge: {
-    position: 'absolute',
-    top: 8,
-    left: 8,
-    backgroundColor: '#FF3B30',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 4,
-  },
-  discountText: {
-    ...Theme.typography.caption,
-    color: Theme.colors.white,
-    fontWeight: '700',
-    fontSize: 10,
-  },
   /** Product name, prices, and ADD button (outside image border) */
   infoContainer: {
     padding: Theme.spacing.s,
   },
   name: {
     ...Theme.typography.bodySmall,
-    fontSize: 12,
+    fontSize: moderateScale(14),
     fontWeight: '500',
     color: Theme.colors.text,
     marginBottom: Theme.spacing.xs,
-    minHeight: 32,
+    minHeight: scale(32),
   },
   /** Price and ADD button on same row (Figma) */
   priceRow: {
@@ -174,26 +159,26 @@ const styles = StyleSheet.create({
   price: {
     ...Theme.typography.bodyMedium,
     fontWeight: '700',
-    fontSize: 16,
+    fontSize: moderateScale(16),
     color: Theme.colors.text,
   },
   originalPrice: {
-    fontSize: 13,
+    fontSize: moderateScale(13),
     color: Theme.colors.textSecondary,
     textDecorationLine: 'line-through',
-    marginTop: 2,
+    marginTop: scale(2),
   },
   addButton: {
     backgroundColor: Theme.colors.primary,
-    paddingVertical: 6,
+    paddingVertical: scale(6),
     paddingHorizontal: Theme.spacing.m,
-    borderRadius: 6,
+    borderRadius: scale(6),
     alignItems: 'center',
     justifyContent: 'center',
     flexShrink: 0,
   },
   addButtonText: {
-    fontSize: 12,
+    fontSize: moderateScale(12),
     color: Theme.colors.white,
     fontWeight: '700',
   },
@@ -202,27 +187,27 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: Theme.colors.primary,
-    borderRadius: 6,
-    paddingVertical: 4,
-    paddingHorizontal: 6,
-    gap: 6,
+    borderRadius: scale(6),
+    paddingVertical: scale(4),
+    paddingHorizontal: scale(6),
+    gap: scale(6),
     flexShrink: 0,
   },
   quantityControlBtn: {
-    padding: 2,
+    padding: scale(2),
     justifyContent: 'center',
     alignItems: 'center',
   },
   quantityControlIcon: {
-    width: 14,
-    height: 14,
+    width: scale(14),
+    height: scale(14),
     tintColor: Theme.colors.white,
   },
   quantityControlNumber: {
-    fontSize: 12,
+    fontSize: moderateScale(12),
     fontWeight: '700',
     color: Theme.colors.white,
-    minWidth: 16,
+    minWidth: scale(16),
     textAlign: 'center',
   },
 });

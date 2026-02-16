@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, ImageSourcePropType } from 'react-native';
 import { Theme } from '../../theme';
+import { scale } from '../../utils/scale';
 
 interface VegetableBannerProps {
   title: string;
@@ -35,8 +36,8 @@ const styles = StyleSheet.create({
   container: {
     marginHorizontal: Theme.spacing.l,
     marginBottom: Theme.spacing.m,
-    height: 120,
-    borderRadius: 16,
+    height: scale(120),
+    borderRadius: scale(16),
     backgroundColor: Theme.colors.white,
     flexDirection: 'row',
     padding: Theme.spacing.l,
@@ -45,8 +46,8 @@ const styles = StyleSheet.create({
     borderColor: Theme.colors.border,
   },
   imageContainer: {
-    width: 100,
-    height: 100,
+    width: scale(100),
+    height: scale(100),
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -71,16 +72,16 @@ const styles = StyleSheet.create({
   },
   dotsContainer: {
     position: 'absolute',
-    bottom: 12,
+    bottom: scale(12),
     left: '50%',
-    transform: [{ translateX: -20 }],
+    transform: [{ translateX: scale(-20) }],
     flexDirection: 'row',
-    gap: 6,
+    gap: scale(6),
   },
   dot: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
+    width: scale(6),
+    height: scale(6),
+    borderRadius: scale(3),
     backgroundColor: Theme.colors.border,
   },
   activeDot: {

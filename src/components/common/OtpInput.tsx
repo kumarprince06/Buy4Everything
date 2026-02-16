@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Theme } from '../../theme';
+import { scale, moderateScale } from '../../utils/scale';
 
 interface OtpInputProps {
   length?: number;
@@ -116,16 +117,16 @@ const styles = StyleSheet.create({
     marginBottom: 0,
   },
   otpBox: {
-    width: 48,
-    height: 56,
-    borderRadius: 12,
+    width: scale(48),
+    height: scale(56),
+    borderRadius: scale(12),
     borderWidth: 1.5,
     borderColor: Theme.colors.border,
     backgroundColor: Theme.colors.surface,
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    fontSize: 24,
+    fontSize: moderateScale(24),
     fontWeight: '600',
     color: Theme.colors.text,
   },

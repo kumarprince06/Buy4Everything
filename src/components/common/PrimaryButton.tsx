@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { Theme } from '../../theme';
 import { AppLoader } from './AppLoader';
+import { scale } from '../../utils/scale';
 
 interface PrimaryButtonProps {
   title: string;
@@ -88,8 +89,8 @@ export const PrimaryButton: React.FC<PrimaryButtonProps> = ({
 
 const styles = StyleSheet.create({
   button: {
-    height: 52,
-    borderRadius: 12,
+    height: scale(52),
+    borderRadius: scale(12),
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: Theme.spacing.m,

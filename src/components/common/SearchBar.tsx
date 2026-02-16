@@ -12,6 +12,7 @@ import React from 'react';
 import { View, TextInput, StyleSheet, Image } from 'react-native';
 import { Theme } from '../../theme';
 import { Icons } from '../../assets/icons';
+import { scale, moderateScale } from '../../utils/scale';
 
 interface SearchBarProps {
   placeholder?: string;
@@ -55,9 +56,9 @@ const styles = StyleSheet.create({
     paddingBottom: Theme.spacing.s,
   },
   searchBar: {
-    height: 55,
+    height: scale(55),
     backgroundColor: Theme.colors.surface,
-    borderRadius: 25,
+    borderRadius: scale(25),
     borderWidth: 1,
     borderColor: Theme.colors.border,
     flexDirection: 'row',
@@ -65,8 +66,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: Theme.spacing.m,
   },
   searchIcon: {
-    width: 20,
-    height: 20,
+    width: scale(20),
+    height: scale(20),
     tintColor: Theme.colors.textSecondary,
   },
   searchIconOnDark: {
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
     ...Theme.typography.bodyMedium,
     marginLeft: Theme.spacing.s,
     color: Theme.colors.text,
-    fontSize: 16,
+    fontSize: moderateScale(16),
   },
   containerOnDark: {
     paddingHorizontal: Theme.spacing.l,

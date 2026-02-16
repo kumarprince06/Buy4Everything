@@ -1,8 +1,10 @@
+import { scale } from '../utils/scale';
+
 export const Spacing = {
-    xs: 4,
-    s: 8,
-    m: 16,
-    l: 24,
-    xl: 32,
-    xxl: 48,
+    xs: scale(4),
+    s: scale(8),
+    m: scale(16),
+    l: scale(24),
+    xl: scale(32),
+    xxl: scale(48),
 };
